@@ -2,12 +2,12 @@ import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [tailwindcss()],
-  server: {
-    port: 1686,
-  },
-  build: {
-    outDir: 'build',
-    emptyOutDir: true,
-  },
+	plugins: [tailwindcss()],
+	server: {
+		port: 1686,
+	},
+	build: {
+		outDir: 'build',
+		emptyOutDir: true,
+	},
 })

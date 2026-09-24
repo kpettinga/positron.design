@@ -1,20 +1,20 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #0f1419;
-  --color-paper: #f7f4ef;
-  --color-accent: #e85d04;
+	--font-sans: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+	--color-ink: #0f1419;
+	--color-paper: #f7f4ef;
+	--color-accent: #e85d04;
 }
 
 html {
-  font-family: var(--font-sans);
-  font-weight: 400;
+	font-family: var(--font-sans);
+	font-weight: 400;
 }
 
 body {
-  margin: 0;
-  color: var(--color-ink);
-  background: var(--color-paper);
+	margin: 0;
+	color: var(--color-ink);
+	background: var(--color-paper);
 }
