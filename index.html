@@ -32,23 +32,19 @@
 			<section
 				class="relative flex min-h-dvh flex-col items-center justify-center gap-6 overflow-hidden px-6 text-center"
 			>
-				<div
+				<canvas
 					id="background"
-					class="pointer-events-none absolute inset-0"
-					style="
-						background: radial-gradient(
-							circle at 50% -33vh,
-							#ff2754 0%,
-							transparent 70%
-						);
-					"
+					class="pointer-events-none absolute inset-0 h-full w-full opacity-0"
 					aria-hidden="true"
+				></canvas>
+				<div
+					class="absolute inset-0 bg-[radial-gradient(#88c7ff_-60%,transparent_70%)] bg-[center_-50vh] bg-no-repeat bg-blend-color"
 				></div>
 				<h1>
 					<span class="sr-only">Positron</span>
 					<!-- prettier-ignore -->
 					<svg width="606" height="214" viewBox="0 0 606 214" fill="none" xmlns="http://www.w3.org/2000/svg"
-						class="logo max-w-[90vw] mx-auto block aspect-[606/214] h-auto"	
+						class="logo max-w-[70vw] mx-auto block aspect-[606/214] h-auto"	
 					>
 						<g clip-path="url(#clip0_56_46)">
 							<circle id="shadow-5" class="trail" cx="286.689" cy="31.3775" r="15.6888" fill="#ffffff" />
@@ -74,9 +70,9 @@
 					</svg>
 				</h1>
 				<p
-					class="absolute bottom-2 left-1/2 -translate-x-1/2 text-black/60"
+					class="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/70"
 				>
-					Coming soon
+					Creative Engineering
 				</p>
 			</section>
 		</main>

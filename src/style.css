@@ -20,7 +20,18 @@ body {
 }
 
 #background {
+	display: block;
+	width: 100%;
+	height: 100%;
 	opacity: 0;
+}
+
+#background.is-fallback {
+	background: radial-gradient(
+		circle at 50% -33vh,
+		#ff2754 0%,
+		transparent 70%
+	);
 }
 
 #background.is-shown {

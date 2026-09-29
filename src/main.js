@@ -1,9 +1,11 @@
+import { mountMeshBackground } from './background.js'
+
 const logo = document.querySelector('.logo')
 const background = document.querySelector('#background')
 const dot = document.querySelector('#dot')
 const trails = [...document.querySelectorAll('.trail')]
 const enterDurationMs = 1000
-const dotDurationMs = 250
+const dotDurationMs = 500
 const trailFadeMs = dotDurationMs * 0.25
 const dotLeadMs = 500
 
@@ -74,5 +76,6 @@ function returnDot() {
 }
 
 window.addEventListener('load', () => {
+	if (background instanceof HTMLCanvasElement) mountMeshBackground(background)
 	requestAnimationFrame(enterLogo)
 })
