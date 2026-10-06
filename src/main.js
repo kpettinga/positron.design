@@ -1,6 +1,7 @@
 import { mountMeshBackground } from './background.js'
 
 const logo = document.querySelector('.logo')
+const tagline = document.querySelector('.tagline')
 const background = document.querySelector('#background')
 const dot = document.querySelector('#dot')
 const trails = [...document.querySelectorAll('.trail')]
@@ -26,6 +27,7 @@ function enterLogo() {
 	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
 	logo.style.animationDuration = `${enterDurationMs}ms`
+	logo.addEventListener('animationend', onLogoEntered)
 	logo.classList.add('is-entered')
 
 	if (background) {
@@ -34,6 +36,12 @@ function enterLogo() {
 	}
 
 	window.setTimeout(returnDot, Math.max(0, enterDurationMs - dotLeadMs))
+}
+
+function onLogoEntered(event) {
+	if (event.target !== logo || event.animationName !== 'logo-enter') return
+	logo.removeEventListener('animationend', onLogoEntered)
+	tagline?.classList.add('is-shown')
 }
 
 // CSS ease-out is cubic-bezier(0, 0, 0.58, 1). Invert it so a fade
