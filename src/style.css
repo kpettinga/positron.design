@@ -74,7 +74,6 @@ body {
 }
 
 #dot {
-	opacity: 0;
 	transform: translate3d(0, calc(15.6888% * 2.5), 0);
 }
 
@@ -86,12 +85,10 @@ body {
 
 @keyframes dot-return {
 	from {
-		opacity: 0;
 		transform: translate3d(0, calc(15.6888% * 2.5), 0);
 	}
 
 	to {
-		opacity: 1;
 		transform: none;
 	}
 }
