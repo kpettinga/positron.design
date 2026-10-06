@@ -8,6 +8,18 @@ const enterDurationMs = 1000
 const dotDurationMs = 500
 const trailFadeMs = dotDurationMs * 0.25
 const dotLeadMs = 500
+const grabRadius = 100
+const cursorDot = document.createElement('div')
+const cursorCore = document.createElement('span')
+const cursorRing = document.createElement('span')
+cursorDot.id = 'cursor-dot'
+cursorDot.setAttribute('aria-hidden', 'true')
+cursorCore.className = 'cursor-core'
+cursorRing.className = 'cursor-ring'
+cursorDot.append(cursorCore, cursorRing)
+document.body.append(cursorDot)
+
+let dotCaught = false
 
 function enterLogo() {
 	if (!logo) return
@@ -74,6 +86,62 @@ function returnDot() {
 	dot.classList.add('is-home')
 	lightTrails()
 }
+
+function placeCursorDot(x, y) {
+	cursorDot.style.left = `${x}px`
+	cursorDot.style.top = `${y}px`
+}
+
+function catchDot(x, y) {
+	if (!dot || dotCaught) return
+
+	dotCaught = true
+	const size = dot.getBoundingClientRect().width
+	cursorDot.style.width = `${size}px`
+	cursorDot.style.height = `${size}px`
+	placeCursorDot(x, y)
+	cursorDot.classList.add('is-on')
+	dot.style.visibility = 'hidden'
+	document.documentElement.classList.add('is-dot-cursor')
+
+	for (const trail of trails) trail.remove()
+}
+
+function onPointerMove(event) {
+	if (!dot || event.pointerType === 'touch') return
+
+	if (!dotCaught) {
+		const rect = dot.getBoundingClientRect()
+		const dx = event.clientX - (rect.left + rect.width / 2)
+		const dy = event.clientY - (rect.top + rect.height / 2)
+		if (dx * dx + dy * dy > grabRadius * grabRadius) return
+		catchDot(event.clientX, event.clientY)
+		return
+	}
+
+	placeCursorDot(event.clientX, event.clientY)
+}
+
+function onPointerDown(event) {
+	if (!dotCaught || event.pointerType === 'touch' || event.button !== 0) return
+	cursorDot.classList.add('is-pressed')
+}
+
+function releaseCursor() {
+	cursorDot.classList.remove('is-pressed')
+}
+
+window.addEventListener('pointermove', onPointerMove)
+window.addEventListener('pointerdown', onPointerDown)
+window.addEventListener('pointerup', releaseCursor)
+window.addEventListener('pointercancel', releaseCursor)
+window.addEventListener('blur', releaseCursor)
+window.addEventListener('resize', () => {
+	if (!dotCaught || !dot) return
+	const size = dot.getBoundingClientRect().width
+	cursorDot.style.width = `${size}px`
+	cursorDot.style.height = `${size}px`
+})
 
 window.addEventListener('load', () => {
 	if (background instanceof HTMLCanvasElement) mountMeshBackground(background)
